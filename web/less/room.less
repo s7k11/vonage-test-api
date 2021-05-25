@@ -1,0 +1,889 @@
+// Components
+@import "../bower_components/utils/reset.less";
+@import "../bower_components/utils/mixins.less";
+@import "../bower_components/modals/modals.less";
+@import "../bower_components/sidebars/sidebars.less";
+@import "../bower_components/dropdowns/dropdowns.less";
+@import "../bower_components/lists/lists.less";
+
+@import "chat.less";
+@import "base.less";
+@import "buttons.less";
+@import "icons.less";
+@import "bubble.less";
+@import "layout.less";
+@import "tooltips.less";
+@import "flexbox.less";
+@import "landing.less";
+
+body {
+  margin: 0;
+  display: flex;
+  .flex-direction(row);
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+  color: @solidWhite;
+  overflow-y: hidden;
+  background-color: @mainBackgroundColor;
+}
+
+[data-archive-status="started"] #top-banner {
+  #startArchiving {
+    display: none;
+  }
+
+  #stopArchiving {
+    display: block;
+  }
+}
+
+#top-banner {
+  visibility: hidden;
+  display: none;
+  height: 98px;
+  width: 100%;
+  background: @darkBlue;
+  box-shadow: 0px 2px 4px @blackAlpha50;
+  position: absolute;
+  display: flex;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  @media @smartphonesPortrait {
+    height: 56px;
+    justify-content: space-between;
+  }
+
+  @media @smartphonesLandscape{
+    height: 56px;
+    justify-content: space-between;
+    min-height: 50px;
+  }
+
+  .icon-container {
+    display: flex;
+    .flex-direction(row);
+    .align-items(center);
+    .justify-content(center);
+    float: left;
+    width: 269px;
+    min-width: 269px;
+    height: 100%;
+    text-align: center;
+    border-right: 1px solid @sanJuanShade;
+    @media @smartphonesPortrait {
+      width: 52px;
+      min-width: 52px;
+    }
+
+    @media @smartphonesLandscape{
+      width: 100px;
+      min-width: 52px;
+    }
+  }
+  .center-container {
+    justify-content: center;
+    flex-direction: column;
+    display: flex;
+    @media @smartphonesPortrait {
+      padding: 0;
+      padding-left: 4px;
+      width: 100%;
+    }
+
+    .room-info {
+      display: flex;
+      flex-direction: column;
+      margin: 0 24px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1.1px;
+      color: @regentGrey;
+      min-width: 200px;
+      @media @smartphonesPortrait {
+        min-width: unset;
+        max-width: 100%;
+        margin: 0 12px;
+      }
+      .left-icon-wrapper {
+        height: 50px;
+        margin: 24px 10px 0 12px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        @media @smartphonesPortrait {
+          height: 44px;
+          margin: 8px 4px 0 4px;
+          justify-content: space-between;
+          width: 20px;
+        }
+      }
+      .participants-wrapper {
+        display: flex;
+      }
+      .name-wrapper {
+        margin-bottom: 6px;
+        min-width: 200px;
+        display: grid;
+        grid-template-columns: auto auto;
+        @media @smartphonesPortrait {
+          margin: 0;
+          width: 100%;
+          padding: 0 4px;
+          min-width: unset;
+          max-width: 100%;
+        }
+        .room-name {
+          font-size: 14px;
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+          color: @solidWhite;
+          margin: 0;
+          @media @smartphonesPortrait {
+            height: 22px;
+          }
+        }
+      }
+    }
+  }
+  .banner-dynamic-btn {
+    background: @purple;
+    border-radius: 5px;
+    border: none;
+    margin-right: 20px;
+    width: 100px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    cursor: pointer;
+    @media @smartphonesPortrait {
+      width: 50px;
+    }
+    i {
+      margin-right: 10px;
+      @media @smartphonesPortrait {
+        margin-right: 2px;
+      }
+      @media @smartphonesLandscape{
+        margin-right: 0px;
+      }
+    }
+
+    @media @smartphonesLandscape{
+      width: 54px;
+    }
+
+    span {
+      @media @smartphonesPortrait {
+        display: none;
+      }
+
+      @media @smartphonesLandscape{
+        display: none;
+      }
+    }
+  }
+
+  .right-container {
+    float: right;
+    display: flex;
+    flex-grow: 1;
+    .flex-direction(row);
+    .align-items(center);
+    .justify-content(flex-end);
+    right: 0;
+
+    @media @smartphonesPortrait {
+      padding-left: 4px;
+    }
+    div {
+      float: left;
+    }
+  }
+  .videoSwitch,
+  .audioSwitch {
+    width: 216px;
+    min-width: 216px;
+    span {
+      margin-left: 12px;
+      margin-right: 12px;
+      vertical-align: top;
+      line-height: 24px;
+      font-size: 12px;
+      color: @silver;
+    }
+    @media @smartphonesPortrait {
+      display: none;
+    }
+
+    @media @smartphonesLandscape{
+      display: none;
+    }
+  }
+  #options-container {
+    &:hover {
+      background-color: @codGrey;
+    }
+    width: 114px;
+    height: 98px;
+    border-left: 1px solid @sanJuanShade;
+    text-align: center;
+    display: flex;
+    right: 0;
+    .flex-direction(row);
+    .align-items(center);
+    .justify-content(center);
+    cursor: pointer;
+    @media @smartphonesPortrait {
+      width: 49px;
+      height: 56px;
+    }
+
+    @media @smartphonesLandscape {
+      width: 100px;
+      height: 56px;
+    }
+    #options-icon {
+      height: 22px;
+      float: none;
+    }
+  }
+  #toggleArchiving,
+  #manageRecordings {
+    margin: 28px 0;
+    height: 40px;
+    background-color: inherit !important;
+    position: relative;
+
+    @media @smartphonesPortrait {
+      top: -20px;
+      right: 25px;
+    }
+
+    a {
+      height: 40px;
+      margin-right: 34px;
+      line-height: 40px;
+      font-size: 12px;
+      border-radius: 6px;
+      box-shadow: none;
+      transition: none;
+    }
+  }
+  #toggleArchiving a {
+
+    @media @smartphonesPortrait {
+      top: -20px;
+      right: 31px;
+      margin: 20px 0 0 0;
+      padding-left: 5px;
+    }
+
+    @media @smartphonesLandscape {
+      padding: 0px 0px;
+      top: -20px;
+      right: 8px;
+      margin-right: 10px;
+    }
+  }
+  .manage-recordings {
+    #startArchiving,
+    #stopArchiving {
+      padding: 0 39.5px 0 5.5px;
+      @media @smartphonesPortrait {
+        padding: 0 5px 0 6px;
+        width: 20px;
+        right: -8px;
+      }
+    }
+  }
+  #manageRecordings {
+    display: none;
+    @media @smartphonesPortrait {
+      display: none;
+      right: -26px;
+      top: 0px;
+    }
+    @media @smartphonesLandscape {
+      right: -26px;
+    }
+    a {
+      position: absolute;
+      right: 0;
+      border-left: 2px solid @snowWhite;
+      font-size: 12px;
+      width: 34px;
+      padding: 0;
+      border-radius: 0 6px 6px 0;
+      @media @smartphonesPortrait {
+         width: 18px;
+      }
+    }
+  }
+  #stopArchiving {
+    display: none;
+    background-color: @mandiRed;
+    padding-left: 15px;
+    &:hover,
+    &:focus,
+    &:active {
+      background-color: @mandiRedDark;
+    }
+  }
+  #manageRecordings.recording {
+    transition: none;
+    a {
+      border-left: 2px solid @pomegranate;
+      background-color: @pomegranateDark;
+    }
+  }
+}
+
+#screen {
+  position: relative;
+  visibility: hidden;
+  overflow: hidden;
+  @media @smartphonesPortrait {
+    margin-top: 58px;
+    margin-bottom: 2px;
+    height: calc(~"100% - 62px");
+    padding: 2px;
+  }
+  @media @smartphonesLandscape {
+    margin-top: 56px;
+    margin-bottom: 2px;
+    height: calc( 100% - 62px);
+    padding: 2px;
+  }
+}
+
+#screen.streams {
+  @media @smartphonesPortrait {
+    height: 100%;
+  }
+}
+
+#room-unlocked-alert {
+  color: white;
+  border-radius: 100px;
+  background-color: @darkBlue;
+  opacity: 0.7;
+  font-size: 16px;
+  span {
+    position: relative;
+    top: -4px;
+  }
+}
+
+.add-to-call-modal {
+  .iti-flag {
+    background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.0/img/flags.png");
+  }
+  @media only screen and (-webkit-min-device-pixel-ratio: 2),
+    only screen and (min--moz-device-pixel-ratio: 2),
+    only screen and (min-device-pixel-ratio: 2),
+    only screen and (min-resolution: 192dpi),
+    only screen and (min-resolution: 2dppx) {
+    .iti-flag {
+      background-image: url("https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/12.1.0/img/flags@2x.png");
+    }
+  }
+
+  .tc-dialog {
+    max-width: 710px;
+    margin-left: 10px!important;
+    margin-right: 10px!important;
+    padding: 20px!important;
+    .current-url {
+      border: none;
+      font-weight: 600;
+      font-size: 14px;
+      line-height: 21px;
+      text-decoration-line: underline;
+      color: @purple;
+      margin-bottom: 25px;
+    }
+    .btn {
+      min-width: 80px;
+      padding: 0px 20px 0px 30px;
+      background: url(../images/icons/Vlt-icon-copy.svg) 10px 50% no-repeat;
+      background-color: black;
+      cursor: pointer;
+      width: fit-content;
+    }
+
+    .google-sign-in-note-container {
+      margin: 25px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    #dialOutForm {
+      margin-top: 36px;
+      margin-bottom: 30px;
+    }
+
+    .google-sign-in-note {
+      max-width: 340px;
+    }
+
+    #dialOutForm:invalid {
+      .btn {
+        background-color: @silver6;
+        pointer-events: none;
+      }
+    }
+
+    .intl-tel-input.allow-dropdown {
+      .selected-flag {
+        background: white;
+
+        .selected-dial-code {
+          padding-left: 35px;
+        }
+
+        .iti-arrow {
+          top: 10px;
+          left: 32px;
+        }
+      }
+
+      input {
+        border: none;
+        border-bottom: 1px solid @summerSky1;
+        padding-left: 90px !important;
+        padding-right: 6px !important;
+      }
+
+      input:invalid {
+        border-bottom: 1px solid @mediumGrey;
+      }
+
+      input:focus {
+        outline: none;
+      }
+    }
+
+    input.phoneNumber::placeholder {
+      color: @spindleGrey;
+    }
+    .itnl-tel-input {
+      input.phoneNumber {
+        border: none;
+        border-bottom: 1px solid @mediumGrey;
+      }
+    }
+  }
+}
+
+.call-controls.visible {
+  opacity: 1;
+  bottom: 0;
+  @media smartphonesPortrait {
+    bottom: 14px;
+  }
+}
+
+.call-controls {
+  position: absolute;
+  display: table;
+  table-layout: fixed;
+  bottom: -86px;
+  left: calc(50% - 290px);
+  height: 86px;
+  width: 520px;
+  margin: auto;
+  z-index: 1001;
+  background-image: url(/images/call-controls-bg.svg);
+  background-repeat: no-repeat;
+  padding: 0 40px;
+  opacity: 0;
+  transition: all @transitionTime;
+
+  @media @smartphonesPortrait {
+    opacity: 1;
+    bottom: 0;
+    width: (100% + 2px);
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    background-image: none;
+    padding: 0;
+  }
+
+    @media @smartphonesLandscape {
+      opacity: 1;
+      right: 0;
+      left: 0;
+      bottom: -86px;
+      background-color: rgba(0, 0, 0, 0.6);
+      background-image: none;
+      padding: 0;
+      width: 70%;
+      padding-left: 15%;
+      padding-right: 15%;
+    }
+
+  #addToCall-container {
+      @media @smartphonesLandscape{
+        display: none;
+      }
+  }
+
+  #screen-share-container,
+  #annotate-button-container {
+    @media @smartphonesPortrait {
+      display: none;
+    }
+
+    @media @smartphonesLandscape{
+      display: none;
+    }
+  }
+
+  div {
+    display: table-cell;
+    padding-top: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    text-align: center;
+    color: @silver;
+    button {
+      background-image: url("/images/icons/inactive-circle.svg");
+      width: 54.2px;
+      height: 54.2px;
+      vertical-align: top;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      color: white;
+      i {
+        vertical-align: middle;
+      }
+    }
+    button.activated {
+      background-image: none;
+      border: 2px solid @purple;
+      border-radius: 50%;
+    }
+    button#endCall {
+      background-image: url("/images/icons/red-circle.svg");
+    }
+    p {
+      margin-top: 10px;
+      margin-bottom: 0;
+      line-height: 0;
+    }
+  }
+}
+
+.feedbackButton.visible {
+  opacity: 1;
+  left: 0;
+}
+
+.feedbackButton {
+  opacity: 0;
+  transition: all @transitionTime;
+  position: absolute;
+  top: 250px;
+  right: 0;
+  left: -190px;
+  height: 49px;
+  width: 190px;
+  transform: rotate(90deg) translate(0, 78px);
+  margin: 0;
+  z-index: 1001;
+  background-image: url(/images/icons/feedback.svg);
+  background-repeat: no-repeat;
+  cursor: pointer;
+  @media @smartphonesPortrait {
+    display: none;
+  }
+  span {
+    display: block;
+    transform: rotate(180deg);
+    font-size: 12px;
+    padding: 20px;
+  }
+}
+
+#dock {
+  display: none;
+}
+
+[data-google-signed-in="true"] {
+  .google-sign-in-note-container {
+    display: none !important;
+  }
+}
+
+[data-desktop-status="sharing"] {
+  #dock .menu {
+    #startSharingDesktop {
+      display: none;
+    }
+
+    #stopSharingDesktop {
+      display: block;
+    }
+  }
+  #screen-share {
+    background-image: none;
+    border: 2px solid @purple;
+    border-radius: 50%;
+  }
+}
+
+[data-chat-status="visible"] {
+  #dock .menu {
+    #startChat {
+      display: none;
+    }
+
+    #stopChat {
+      display: block;
+    }
+  }
+}
+
+#screenShareErrorInstall,
+#extInstallationSuccessful,
+#screenShareErrorMsg {
+  display: none;
+}
+
+[data-screen-sharing-type="error-sharing"] #screenShareErrorMsg,
+[data-screen-sharing-type="error-installing"] #screenShareErrorInstall,
+[data-screen-sharing-type="successful-installation"]
+  #extInstallationSuccessful {
+  display: inline-block;
+}
+
+[data-screen-sharing-type="error-installing"] .tc-dialog {
+  max-width: 280px;
+}
+
+#name-heading {
+  font-size: 30px;
+  margin: 0 0 26px;
+  position: absolute;
+  top: 32px;
+  left: 260px;
+  @media @smartphones {
+    display: none;
+  }
+}
+
+.feedback-report .tc-dialog {
+  padding: 0px;
+  max-width: none;
+  width: 564px;
+  height: 600px;
+
+  .close {
+    right: 20px;
+    top: 20px;
+    cursor: pointer;
+  }
+
+  header {
+    margin-bottom: 30px;
+
+    .title-container {
+      margin-top: 49px;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid @lightGrey2;
+
+      .title {
+        margin-bottom: 10px;
+        font-size: 18px;
+        color: @lightGrey;
+        font-weight: @boldFontWeight;
+      }
+    }
+  }
+
+  section {
+    font-family: @baseFontFamily;
+    font-size: 16px;
+    color: @blueCharcoal;
+    text-align: center;
+    display: block;
+    height: 55px;
+
+    .call-quality-feedback {
+      border-bottom: 1px solid @lightGrey2;
+      height: 240px;
+    }
+
+    .feedback-title {
+      font-weight: @boldFontWeight;
+      margin-top: 10px;
+      display: block;
+    }
+
+    .feedback-title.suggestion-title {
+      margin-top: 33px;
+    }
+
+    .other-info,
+    .other-info:focus {
+      width: 436px;
+      border: none;
+      outline: none;
+      border-bottom: 1px solid @mediumGrey;
+    }
+
+    .other-info::placeholder {
+      color: @mischkaGrey;
+      text-align: center;
+    }
+  }
+
+  .feedback-dropdown {
+    select {
+      padding: 0px;
+      height: 64px;
+      width: 443px;
+      text-align-last: center;
+      font-size: 14px;
+      margin: 7.5px 0 12px 0;
+      border: 1px solid @VeryLightGrey;
+    }
+  }
+
+  .btn {
+    font-size: 16px;
+    height: 50px;
+    line-height: 50px;
+    margin-top: 35px;
+  }
+
+  .btn-blue {
+    background-color: @pelorousBlue;
+  }
+
+  .btn-purple {
+    background-color: @purple;
+  }
+}
+
+footer.main {
+  position: fixed;
+  bottom: 0;
+  right: 60px;
+  z-index: 1001;
+  width: 300px;
+  color: @mediumGrey1;
+  font-size: 8px;
+  line-height: 19px;
+  height: 19px;
+  text-align: right;
+}
+
+#enter.btn {
+  color: @solidWhite;
+  line-height: 18px;
+  overflow: hidden;
+  width: 100%;
+  background-color: @purple;
+  &.accept {
+    background-color: @darkBlue;
+  }
+}
+
+[data-chat-visible="true"] footer.main {
+  background-color: @mainBackgroundColor;
+}
+
+#opentok_canvas {
+  pointer-events: none;
+}
+
+body[data-annotation-visible="true"] {
+  #opentok_canvas {
+    pointer-events: auto;
+  }
+}
+
+.dragging {
+  pointer-events: none;
+}
+
+.dragging:after {
+  content: "";
+  z-index: 1;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background-color: @whiteAlpha60;
+}
+
+.main {
+  width: 100%;
+}
+
+#switchAlerts {
+  z-index: 2147483647; /* Keep modal always on top */
+  form > footer > button {
+    @media @smartphonesPortrait {
+      width: calc(100% - 10px);
+      margin-bottom: 6px;
+    }
+  }
+  .accept {
+    margin-right: 20px;
+  }
+}
+
+.dark-mode {
+  background: black;
+
+  h1 {
+    color: white;
+
+    a {
+      img {
+        margin-right: 25px;
+      }
+    }
+  }
+}
+
+emoji-picker {
+    width: 100%;
+    height: 255px;
+    position: relative;
+    bottom: 345px;
+}
+
+.invite-btn {
+  @media @smartphonesPortrait {
+    display: none!important;
+  }
+}
+
+.duration {
+  @media @smartphonesPortrait {
+    display: inline-flex!important;
+    font-size: 9px;
+  }
+
+  @media @smartphonesLandscape{
+    display: inline-flex!important;
+    font-size: 10px;
+  }
+}
+

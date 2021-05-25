@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>WebRTC Demo - Archive</title>
+    <meta charset="UTF-8">
+    <meta http-equiv="content-type" content="text/html;charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <% if (useGoogleFonts) { %>
+        <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin>
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    <% } else { %>
+        <link rel="preload" href="/fonts/open-sans-v15-latin-regular.woff2" as="font" type="font/woff2" crossorigin>
+        <link href="/css/fonts.css" rel="stylesheet">
+    <% } %>
+    <link rel="stylesheet prefetch" href="/css/room.opentok.css" />
+
+    <% if (enableFeedback && hotjarId && hotjarVersion ) { %>
+    <script>
+        (function(h,o,t,j,a,r){
+         h.hj=h.hj||function(){(h.hj.q=h.hj.q||[]).push(arguments)};
+         h._hjSettings={hjid: <%=hotjarId%>,hjsv: <%=hotjarVersion%>};
+         a=o.getElementsByTagName('head')[0];
+         r=o.createElement('script');r.async=1;
+         r.src=t+h._hjSettings.hjid+j+h._hjSettings.hjsv;
+         a.appendChild(r);
+     })(window,document,'https://static.hotjar.com/c/hotjar-','.js?sv=');
+     </script>
+      <% } %>
+  </head>
+  <body style="background-color: black;background-image: none;">
+    <section class="main">
+      <div class="tc-dialog dark-mode">
+        <h1>
+          <a href="http://tokbox.com/?utm_source=opentokrtc&utm_medium=web&utm_campaign=webrtc">
+            <img src="/images/tokbox-nexmo-logo.svg" alt="opentok transparent logo" height='60px'></a>
+          OpenTok Archive: <%=archiveName%></h1>
+        <div id="roomContainer">
+          <video id="archiveVideo" src="<%=archiveURL%>" autoplay="" controls="true"></video>
+          <br>
+          <br>
+          <a href="<%=archiveURL%>" class="btn btn-purple btn-no-underline ctaarrow-white" download="<%=archiveName%>.mp4">Download</a>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-462500-32', 'auto');
+      ga('send', 'pageview');
+
+    </script>
+  </body>
+</html>
